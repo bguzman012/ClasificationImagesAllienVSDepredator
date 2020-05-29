@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign</title>
+
+</head>
+<body>
+   
+<form action="/apiCNN/predecir" method="post">
+    {% csrf_token %}
+    <p>
+      
+      Sube un archivo:
+      
+      <input type="file" name="archivosubido">
+      
+      <input type="submit" value="Enviar datos">
+      
+    </p>
+      
+</form>
+
+</body>
+</html>

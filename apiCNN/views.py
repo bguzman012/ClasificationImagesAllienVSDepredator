@@ -1,48 +1,11 @@
 #CONTROLADOR
 
 from rest_framework import generics #para microservicio
-from apiSNN import models
-from apiSNN import serializers
+from apiCNN import models
+from apiCNN import serializers
 
 from django.shortcuts import render
-import pyrebase #para consumo servicio base de datos de firebase
-from apiSNN.Logica import modeloSNN #para utilizar modelo SNN
-
-# Create your views here.
-class ListLibro(generics.ListCreateAPIView):
-    """
-    retrieve:
-        Retorna una instancia libro.
-
-    list:
-        Retorna todos los libros, ordenados por los más recientes.
-
-    create:
-        Crea un nuevo libro.
-
-    delete:
-        Elimina un libro existente.
-
-    partial_update:
-        Actualiza uno o más campos de un libro existente.
-
-    update:
-        Actualiza un libro.
-    """
-    queryset = models.Libro.objects.all()
-    serializer_class = serializers.LibroSerializer
-
-class DetailLibro(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Libro.objects.all()
-    serializer_class = serializers.LibroSerializer
-
-class ListPersona(generics.ListCreateAPIView):
-    queryset = models.Persona.objects.all()
-    serializer_class = serializers.PersonaSerializer
-
-class DetailPersona(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Persona.objects.all()
-    serializer_class = serializers.PersonaSerializer
+from apiCNN.Logica import modeloCNN #para utilizar modelo SNN
 
 config = {
 
@@ -56,49 +19,19 @@ config = {
     'measurementId': "G-MKSCN84RDE"
 }
 
-firebase = pyrebase.initialize_app(config)
-auth = firebase.auth()
-
-class Autenticacion():
-
-    def singIn(request):
-
-        return render(request, "signIn.html")
-
-    def postsign(request):
-        email=request.POST.get('email')
-        passw = request.POST.get("pass")
-        try:
-            user = auth.sign_in_with_email_and_password(email,passw)
-        except:
-            message = "invalid cerediantials"
-            return render(request,"signIn.html",{"msg":message})
-        print(user)
-        return render(request, "welcome.html",{"e":email})
+#firebase = pyrebase.initialize_app(config)
+#auth = firebase.auth()
 
 class Clasificacion():
-    #imagen = models.ImageField(upload_to='imagenes')
-    #prediccion = models.CharField(max_length=200, blank=True)
+    def inicio(request):
 
-    def determinarSobrevivencia(request):
-
-        return render(request, "sobrevivencia.html")
-
+        return render(request, "uploadImage.html")
+    
     def predecir(request):
-        try:
-            pclass = int(request.POST.get('pclass'))
-            sex = request.POST.get('sex')
-            age = int(''+request.POST.get('age'))
-            fare = float(request.POST.get('fare'))
-            embarked = request.POST.get('embarked')
-        except:
-            pclass=2
-            sex='female'
-            age=60
-            fare=6670
-            embarked='C'
-        print(type(age))
-        #resul=modeloSNN.modeloSNN.suma(num1,num2)
-        resul=modeloSNN.modeloSNN.predecirSobrevivencia(modeloSNN.modeloSNN,pclass,sex,age,fare,embarked)
-        
-        return render(request, "welcome.html",{"e":resul})
+        image = request.POST.get('archivosubido')
+        print(image)
+
+        return render(request, "uploadImage.html")
+
+
+
