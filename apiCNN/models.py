@@ -9,7 +9,12 @@ class Image(models.Model):
     # upload = models.ImageField(upload_to ='uploads/% Y/% m/% d/')
     label = models.CharField(max_length=20, blank=True)
     probability = models.FloatField()
-    
+
+class ImageTest(models.Model):
+    #https://mc.ai/integrar-modelo-de-red-neuronal-convolucional-en-django/
+    # file will be uploaded to MEDIA_ROOT / uploads 
+    image = models.ImageField(upload_to ='test/') 
+
 #MAESTRO DETALLE
 """
 class Musician(models.Model):
