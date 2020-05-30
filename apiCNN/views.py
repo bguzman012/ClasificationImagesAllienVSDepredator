@@ -33,18 +33,14 @@ class Clasificacion():
     
     def predecir(request):
         test = ImageTest()
-
         param = request.FILES.get('archivosubido')
-        
         nombre = param.name
         print(nombre)
         test.image = param
         test.save()
-        
-        resul=modeloCNN.modeloCNN.predecirSobrevivencia(modeloCNN.modeloCNN, nombre)
-        
-        
-        return render(request, "uploadImage.html")
+        resul=modeloCNN.modeloCNN.predecirSobrevivencia(modeloCNN.modeloCNN, nombre, param)
+
+        return render(request, "welcome.html", {"e":resul, "nombre":nombre, "image":test})
         
         
 

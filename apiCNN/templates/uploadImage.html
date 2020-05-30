@@ -1,26 +1,38 @@
-
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Sign</title>
+  <meta charset="UTF-8">
+  <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'stilos.css' %}">
+  <title>Realizar Prediccion</title>
 
 </head>
+
 <body>
-   
-<form action="/apiCNN/predecir" method="post" enctype="multipart/form-data">
+
+  <form action="/apiCNN/predecir" method="post" enctype="multipart/form-data">
+    <div class="form-group">
     {% csrf_token %}
     <p>
-      
+
       Sube un archivo:
-      
+    <div class="drag-drop">
       <input type="file" name="archivosubido">
-      
-      <input type="submit" value="Enviar datos">
-      
+      <span class="fa-stack fa-2x">
+        <i class="fa fa-cloud fa-stack-2x bottom pulsating"></i>
+        <i class="fa fa-circle fa-stack-1x top medium"></i>
+        <i class="fa fa-arrow-circle-up fa-stack-1x top"></i>
+      </span>
+    </div>
+    <input type="submit" value="Enviar datos">
+
     </p>
-      
-</form>
+    </div>
+  </form>
 
 </body>
+
 </html>

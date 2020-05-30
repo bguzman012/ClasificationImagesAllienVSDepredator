@@ -14,7 +14,7 @@ import pathlib
 from keras.applications.resnet50 import preprocess_input
 
 from apiCNN.models import Image
-from PIL import Image
+from PIL import Image as pil_im
 
 class modeloCNN():
     """Clase modelo SNN"""
@@ -34,7 +34,7 @@ class modeloCNN():
         print("Red Neuronal Cargada desde Archivo") 
         return model
 
-    def predecirSobrevivencia(self, image):
+    def predecirSobrevivencia(self, image, param):
         #Modelo optimizado
         print('MODELO OPTIMIZADO')
         nombreArchivoModelo=r'apiCNN/Logica/architectura_optimizada'
@@ -43,56 +43,51 @@ class modeloCNN():
         self.Selectedmodel=self.cargarRNN(nombreArchivoModelo,nombreArchivoPesos) 
 
         resultadoProbabilidad = []
-        resultadoProbabilidad = self.predict(self, image)
-
-        resultadoProbabilidad = resultadoProbabilidad[: 1]
-        print(resultadoProbabilidad)
-
-        print(resultadoProbabilidad[:,0])
-        
+        resultadoProbabilidad = self.predict(self, image, param)
         
         resultado = np.argmax(resultadoProbabilidad)
 
         mensaje = ""
         if resultado == 0:
             etiqueta = 'Alien'
-            probabilidad = resultadoProbabilidad[:,0:1]
-            mensaje = "La imagen corresponde al personaje:" + Alien + "; con certeza del " + str(probabilidad)
+            probabilidad = resultadoProbabilidad[0, 0]
+            probabilidad = probabilidad * 100
+            mensaje = "La imagen corresponde al personaje: " + etiqueta + "; con certeza del " + str(round(probabilidad, 2)) + "%"
         else:
-            etiqueta = 'Predator'
+            etiqueta = 'Depredador'
             probabilidad = resultadoProbabilidad[0, 1]
-            mensaje = "La imagen corresponde al personaje:" + Predator + "; con certeza del " + str(probabilidad)            
+            probabilidad = probabilidad * 100
+            mensaje = "La imagen corresponde al personaje: " + etiqueta + "; con certeza del " + str(round(probabilidad, 2)) + "%"           
             
+        print(mensaje)
         return mensaje
-        #resultado=self.predict(self,Pclass, Sex, Age,Fare, Embarked)
-        #resultado=resultado[0,0]
-        #print('Predicción:',resultado)
-        #print('Predicción:',self.predict(self,Age=32 ,Fare=9))
-        #print('Predicción:',self.predict(self,Pclass=1, Sex='female', Age=60 ,Fare=0, Embarked='C'))
-        #print('Predicción:',self.predict(self,Pclass=3, Sex='female', Age=78 ,Fare=4563, Embarked='Q'))
-        #mensaje=''
-        #if resultado==1:
-        #    mensaje='Sobrevive'
-        #else:
-        #    mensaje='No sobrevive'
-        #return mensaje
-    def predict(self, image):
+
+    def predict(self, image, param):
 
 
         validation = image
         url= "test/"
         val_url = url + validation
-        img = Image.open(val_url)
+        img = pil_im.open(val_url)
         val = np.stack(preprocess_input(np.array(img.resize((150, 150)))))
         val = (np.expand_dims(val,0))
-
+        imagenModel = models.Image()
+        imagenModel.image = param
 
         pred_probs = self.Selectedmodel.predict(val)
-
-        
         resultado = np.argmax(pred_probs)
+        if resultado == 0:
+            etiqueta = 'Alien'
+            probabilidad = pred_probs[0, 0]
+            imagenModel.label = etiqueta
+            imagenModel.probability = round(probabilidad, 2)
+        else:
+            etiqueta = 'Depredador'
+            probabilidad = pred_probs[0, 1]
+            imagenModel.label = etiqueta
+            imagenModel.probability = round(probabilidad, 2)
 
+        imagenModel.save()        
+        print('Imagen Guardada')
 
-        print(pred_probs)
-
-        return resultado
+        return pred_probs
