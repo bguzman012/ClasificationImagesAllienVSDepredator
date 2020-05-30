@@ -47,8 +47,8 @@
         <div class="row">
           <div class="col-md-3">
             <a href="/Pr-ctica-de-laboratorio-02-Servlets-JSP-y-JPA/index.html"><img id="otra "
-              src="{% static 'uploads/icono.jpg' %}" alt="Slider"
-              style="width: 50px; height: 50px; margin-left: 20%; margin-top: 8%;"></a>
+                src="{% static 'uploads/icono.jpg' %}" alt="Slider"
+                style="width: 50px; height: 50px; margin-left: 20%; margin-top: 8%;"></a>
 
 
           </div>
@@ -74,34 +74,34 @@
     </section>
   </header>
 
-  
-    <div class="container">
 
-      <form action="/apiCNN/predecir" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-          {% csrf_token %}
-          <p>
+  <div class="container">
 
-            Subir un personaje:
-          <div class="drag-drop">
-            <input type="file" name="archivosubido">
-            <span class="fa-stack fa-2x">
-              <i class="fa fa-cloud fa-stack-2x bottom pulsating"></i>
-              <i class="fa fa-circle fa-stack-1x top medium"></i>
-              <i class="fa fa-arrow-circle-up fa-stack-1x top"></i>
-            </span>
-          </div>
-          <input type="submit" value="Predecir">
+    <form action="/apiCNN/predecir" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        {% csrf_token %}
+        <p>
 
-          </p>
+          Subir un personaje:
+        <div class="drag-drop">
+          <input type="file" name="archivosubido">
+          <span class="fa-stack fa-2x">
+            <i class="fa fa-cloud fa-stack-2x bottom pulsating"></i>
+            <i class="fa fa-circle fa-stack-1x top medium"></i>
+            <i class="fa fa-arrow-circle-up fa-stack-1x top"></i>
+          </span>
         </div>
-      </form>
+        <input type="submit" value="Predecir" style="margin-top: 51px;">
 
-    </div>
+        </p>
+      </div>
+    </form>
+
+  </div>
   </section>
 
   <footer>
-    
+
     <div class="footer_bottom">
       <div class="footer_overlay"></div>
       <div class="container">
@@ -109,12 +109,12 @@
           <div class="col-md-4">
             <div class="copy_txt">
               <p>
-                Copyright © 2020 disenado por <span>Bryam Guzman</span>
+                Copyright © 2020 disenado por <span>Bryam Guzman, Adrian Tene</span>
               </p>
             </div>
           </div>
           <div class="col-md-8">
-            
+
           </div>
         </div>
       </div>
