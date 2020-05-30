@@ -1,37 +1,129 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html>
 
 <head>
   <meta charset="UTF-8">
+  <title>Realizar Prediccion</title>
   <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
   <link rel="stylesheet" href="{% static 'stilos.css' %}">
-  <title>Realizar Prediccion</title>
-
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'Styles/styles2.css' %}">
+  <link rel="stylesheet" href="{% static 'Styles/InicioSesion.css' %}">
 </head>
 
 <body>
+  <header>
 
-  <form action="/apiCNN/predecir" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-    {% csrf_token %}
-    <p>
+    <section class="header-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <ul>
+              <li><a href="/Pr-ctica-de-laboratorio-02-Servlets-JSP-y-JPA/index.html">Inicio</a></li>
 
-      Sube un archivo:
-    <div class="drag-drop">
-      <input type="file" name="archivosubido">
-      <span class="fa-stack fa-2x">
-        <i class="fa fa-cloud fa-stack-2x bottom pulsating"></i>
-        <i class="fa fa-circle fa-stack-1x top medium"></i>
-        <i class="fa fa-arrow-circle-up fa-stack-1x top"></i>
-      </span>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <div class="icon">
+              <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a
+                href="#"><i class="fa fa-google-plus"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a
+                href="#"><i class="fa fa-wifi"></i></a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="a-right"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="clear"></div>
+    <section class="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <a href="/Pr-ctica-de-laboratorio-02-Servlets-JSP-y-JPA/index.html"><img id="otra "
+              src="{% static 'uploads/icono.jpg' %}" alt="Slider"
+              style="width: 50px; height: 50px; margin-left: 20%; margin-top: 8%;"></a>
+
+
+          </div>
+          <div class="col-md-7">
+            <div class="contenedor">
+
+              <p>
+                <a href=""> AlienVsDepredador </a>
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="header-part">
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  
+    <div class="container">
+
+      <form action="/apiCNN/predecir" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          {% csrf_token %}
+          <p>
+
+            Subir un personaje:
+          <div class="drag-drop">
+            <input type="file" name="archivosubido">
+            <span class="fa-stack fa-2x">
+              <i class="fa fa-cloud fa-stack-2x bottom pulsating"></i>
+              <i class="fa fa-circle fa-stack-1x top medium"></i>
+              <i class="fa fa-arrow-circle-up fa-stack-1x top"></i>
+            </span>
+          </div>
+          <input type="submit" value="Predecir">
+
+          </p>
+        </div>
+      </form>
+
     </div>
-    <input type="submit" value="Enviar datos">
+  </section>
 
-    </p>
+  <footer>
+    
+    <div class="footer_bottom">
+      <div class="footer_overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="copy_txt">
+              <p>
+                Copyright © 2020 disenado por <span>Bryam Guzman</span>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-8">
+            
+          </div>
+        </div>
+      </div>
     </div>
-  </form>
+  </footer>
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/active.js"></script>
+
 
 </body>
 
